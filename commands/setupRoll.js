@@ -4,12 +4,6 @@ const { MessageActionRow, MessageEmbed } = require('discord.js');
 const Database = require("@replit/database")
 const db = new Database()
 
-db.get("dm").then(dm => {
-  if (!dm) {
-    db.set("dm", []);
-  }
-})
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('setup-roll')
@@ -25,39 +19,49 @@ module.exports = {
 		const removeDm = interaction.options.getRole('remove-dm');
 		const listDm = interaction.options.getBoolean('list-dm');
 
+		// Init DB if Empty
+		db.get(interaction.member.guild.id).then(d => {
+		  if (!d) {
+				array = {"defaultDice": 100, "dm": [], "sheet": []}
+		    db.set(interaction.member.guild.id, array);
+		  }
+		})
+
 		if(defaultDice) {
-			await db.set("defaultDice", defaultDice);
+			let bd = await db.get(interaction.member.guild.id);
+			bd["defaultDice"] = defaultDice;
+			await db.set(interaction.member.guild.id, bd);
 			await interaction.reply({ content: 'Default Dice is now : ' + defaultDice, ephemeral: true });
 		}
     else if(addDm) {
-			db.get("dm").then(dm => {
-        if(dm != null)
-				  dm.push([addDm.id]);
+			db.get(interaction.member.guild.id).then(bd => {
+        if(bd["dm"] != null)
+				  bd["dm"].push(addDm.id);
         else
-          dm = [addDm.id];
-				db.set("dm", dm);
+          bd["dm"] = addDm.id;
+				db.set(interaction.member.guild.id, bd);
 			})
 			await interaction.reply({ content: 'Role <@&'+ addDm.id +'> added!', ephemeral: true });
 		}
     else if(removeDm) {
-			db.get("dm").then(dm => {
-        dm.splice(dm.indexOf(removeDm), 1)
-        db.set("dm", dm);
+			db.get(interaction.member.guild.id).then(bd => {
+        bd["dm"].splice(bd["dm"].indexOf(removeDm), 1)
+        db.set(interaction.member.guild.id, bd);
 			})
 			await interaction.reply({ content: 'Role <@&'+ removeDm.id +'> removed!', ephemeral: true });
 		}
     else if(listDm) {
-      const list = await db.get("dm");
-			if(list) {
+      const bd = await db.get(interaction.member.guild.id);
+			if(bd["dm"]) {
 	      var txt = '';
-	      list.forEach(id => {
+	      bd["dm"].forEach(id => {
 				  txt += '<@&'+ id +'>\n';
 			  });
 			}
 	  		const embed = new MessageEmbed()
 	  			.setColor('#0099ff')
 	  			.setTitle('Dungeon Master\'s roles')
-	  			.setDescription(list.length > 0 && list != null ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
+	  			.setDescription(bd["dm"].length > 0 && bd["dm"] ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
 	      
 				await interaction.reply({ ephemeral: true, embeds: [embed] });
 		}

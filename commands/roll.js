@@ -6,12 +6,6 @@ const CreateButton = require("../functions/messageButton.js")
 const Database = require("@replit/database")
 const db = new Database()
 
-db.get("defaultDice").then(def => {
-  if (!def) {
-    db.set("defaultDice", 100);
-  }
-})
-
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -26,8 +20,16 @@ module.exports = {
 		const dices = interaction.options.getString('dices');
 		const sets = interaction.options.getInteger('sets');
 		const unique = interaction.options.getBoolean('unique');
-		const hidden = interaction.options.getBoolean('hidden');
+		let hidden = interaction.options.getBoolean('hidden');
 		const setDefault = interaction.options.getInteger('default');
+
+		// Init DB if Empty
+		db.get(interaction.member.guild.id).then(d => {
+		  if (!d) {
+				array = {"defaultDice": 100, "dm": [], "sheet": []}
+		    db.set(interaction.member.guild.id, array);
+		  }
+		})
 
 		const row = new MessageActionRow();
 		if (sets) {
@@ -99,12 +101,15 @@ module.exports = {
 			await interaction.reply({ content: txt, ephemeral: hidden });
 		}
     else {
-      const dice = await db.get("defaultDice");
-      const list = await db.get("dm");
-			if(interaction.member._roles.some(i => list.includes(i)) && hidden === null) {
-				await interaction.reply({ content: ''+ Math.floor(Math.random() * dice + 1), ephemeral: true });
-			} else
-				await interaction.reply({ content: ''+ Math.floor(Math.random() * dice + 1), ephemeral: hidden });
+      const bd = await db.get(interaction.member.guild.id);
+      const dice = bd["defaultDice"];
+      const list = bd["dm"];
+			if(list) {
+				if(interaction.member._roles.some(i => list.includes(i)) && hidden === null) {
+					hidden = true;
+				}
+			}
+			await interaction.reply({ content: ''+ Math.floor(Math.random() * dice + 1), ephemeral: hidden });
 		}
 	},
 };

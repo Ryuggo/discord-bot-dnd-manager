@@ -6,7 +6,6 @@ const { token } = require('./config.json');
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-
 // Dynamically retrieve your event files
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 

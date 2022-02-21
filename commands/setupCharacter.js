@@ -23,18 +23,27 @@ module.exports = {
 		const edit = interaction.options.getBoolean('edit');
 		const remove = interaction.options.getBoolean('remove');
 
+		// Init DB if Empty
+		db.get(interaction.member.guild.id).then(d => {
+		  if (!d) {
+				array = {"defaultDice": 100, "dm": [], "sheet": []}
+		    db.set(interaction.member.guild.id, array);
+		  }
+		})
+
 		if(show) {
-      const list = await db.get("character"+interaction.member.guild.id);
-      var txt = '';
-      list.forEach(id => {
-			  txt += '<@&'+ id +'>\n';
-		  });
-      
-  		const embed = new MessageEmbed()
-  			.setColor('#0099ff')
-  			.setTitle('Character\'s Sheet')
-  			.setDescription(list.length > 0 ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
-      
+      const list = await db.get(interaction.member.guild.id);
+			if(list) {
+	      var txt = '';
+	      list.forEach(id => {
+				  txt += '<@&'+ id +'>\n';
+			  });
+	      
+	  		const embed = new MessageEmbed()
+	  			.setColor('#0099ff')
+	  			.setTitle('Character\'s Sheets')
+	  			.setDescription(list.length > 0 && list ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
+			}
 			await interaction.reply({ ephemeral: true, embeds: [embed] });
 		}
 		else if(row != null & column != null) {
