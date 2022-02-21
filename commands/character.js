@@ -1,14 +1,10 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed, MessageButton } = require('discord.js');
 
+const DB = require("../functions/initDB.js")
+
 const Database = require("@replit/database")
 const db = new Database()
-
-db.get("characters").then(def => {
-  if (!def) {
-    db.set("characters", 100);
-  }
-})
 
 
 module.exports = {
@@ -29,6 +25,8 @@ module.exports = {
 		const editCh = interaction.options.getString('edit');
 		const listCh = interaction.options.getString('list');
 		const removeCh = interaction.options.getString('remove');
+
+		DB.InitDB(interaction);
 
 		const row = new MessageActionRow();
 		if (showCh) {

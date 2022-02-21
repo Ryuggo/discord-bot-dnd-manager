@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed, MessageButton } = require('discord.js');
 
 const CreateButton = require("../functions/messageButton.js")
+const DB = require("../functions/initDB.js")
 
 const Database = require("@replit/database")
 const db = new Database()
@@ -23,13 +24,15 @@ module.exports = {
 		let hidden = interaction.options.getBoolean('hidden');
 		const setDefault = interaction.options.getInteger('default');
 
+		DB.InitDB(interaction);
+		/*
 		// Init DB if Empty
 		db.get(interaction.member.guild.id).then(d => {
 		  if (!d) {
 				array = {"defaultDice": 100, "dm": [], "sheet": []}
 		    db.set(interaction.member.guild.id, array);
 		  }
-		})
+		})*/
 
 		const row = new MessageActionRow();
 		if (sets) {

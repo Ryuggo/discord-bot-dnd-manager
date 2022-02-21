@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed } = require('discord.js');
 
+const DB = require("../functions/initDB.js")
+
 const Database = require("@replit/database")
 const db = new Database()
 
@@ -19,13 +21,7 @@ module.exports = {
 		const removeDm = interaction.options.getRole('remove-dm');
 		const listDm = interaction.options.getBoolean('list-dm');
 
-		// Init DB if Empty
-		db.get(interaction.member.guild.id).then(d => {
-		  if (!d) {
-				array = {"defaultDice": 100, "dm": [], "sheet": []}
-		    db.set(interaction.member.guild.id, array);
-		  }
-		})
+		DB.InitDB(interaction);
 
 		if(defaultDice) {
 			let bd = await db.get(interaction.member.guild.id);

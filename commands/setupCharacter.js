@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed } = require('discord.js');
 
+const BD = require("../functions/initDB.js")
+
 const Database = require("@replit/database")
 const db = new Database()
 
@@ -23,46 +25,29 @@ module.exports = {
 		const edit = interaction.options.getBoolean('edit');
 		const remove = interaction.options.getBoolean('remove');
 
-		// Init DB if Empty
-		db.get(interaction.member.guild.id).then(d => {
-		  if (!d) {
-				array = {"defaultDice": 100, "dm": [], "sheet": []}
-		    db.set(interaction.member.guild.id, array);
-		  }
-		})
+		BD.InitDB(interaction);
 
 		if(show) {
-      const list = await db.get(interaction.member.guild.id);
-			if(list) {
+      const bd = await db.get(interaction.member.guild.id);
+			console.log(bd["sheet"]);
+			console.log(bd["sheet"][0]);
+			if(bd["sheet"]) {
 	      var txt = '';
-	      list.forEach(id => {
+	      bd["sheet"].forEach(id => {
 				  txt += '<@&'+ id +'>\n';
 			  });
 	      
 	  		const embed = new MessageEmbed()
 	  			.setColor('#0099ff')
 	  			.setTitle('Character\'s Sheets')
-	  			.setDescription(list.length > 0 && list ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
+	  			.setDescription(bd["sheet"].length > 0 && bd["sheet"] ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
 			}
 			await interaction.reply({ ephemeral: true, embeds: [embed] });
 		}
 		else if(row != null & column != null) {
     	if(create) {
-				db.get("dm").then(dm => {
-	        if(dm != null)
-					  dm.push([addDm.id]);
-	        else
-	          dm = [addDm.id];
-					db.set("dm", dm);
-				})
-				await interaction.reply({ content: 'Role <@&'+ addDm.id +'> added!', ephemeral: true });
 			}
 	    else if(removeDm) {
-				db.get("dm").then(dm => {
-	        dm.splice(dm.indexOf(removeDm), 1)
-	        db.set("dm", dm);
-				})
-				await interaction.reply({ content: 'Role <@&'+ removeDm.id +'> removed!', ephemeral: true });
 			}
 	    else if(edit) {
 			}
