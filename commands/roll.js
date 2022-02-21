@@ -80,18 +80,20 @@ module.exports = {
 
       let list = new Map();
       allDices.forEach(d => {
-        const tmp = d.split('/');
+        const tmp = d.split('d');
         list.set(tmp[1], tmp[0]);
       })
 
-      let txt = '';
+      let txt = '```Markdown\n';
       for(let [key, value] of list) {
         let tmp = [];
         for(let i = 0; i < value; i++) {
-          tmp.push(Math.floor(Math.random() * key + 1).toString());
+          tmp.push(Math.floor(Math.random() * key + 1));
         }
-        txt += '**'+ key +'** ['+ tmp +']\n';
+        txt += '# '+ tmp.reduce((partialSum, a) => partialSum + a, 0) +'\n';
+				txt += 'Details:['+ value +"d"+ key +' ('+ tmp.join(" ") +')]\n';
       }
+			txt += '```';
       
 			await interaction.reply({ content: txt, ephemeral: hidden });
 		}
