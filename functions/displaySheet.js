@@ -14,7 +14,7 @@ module.exports = {
 				if(bloc[key].length > 1) {
 					embed = (this.DetectArray2(bloc[key], embed));
 				} else {
-					embed.setDescription(bloc[key] && bloc[key].length > 0?bloc[key] : 'NaN');
+					embed.setDescription(bloc[key] && bloc[key].length > 0?bloc[key] : '=');
 				}
 			}
 		});
@@ -29,7 +29,7 @@ module.exports = {
 						embed.addField('__'+ key +'__', '-_-_-_-_-_-_-', false);
 						embed = (this.DetectArray2(bloc[key], embed));
 					} else {
-							embed.addField(key, bloc[key] && bloc[key].length > 0?bloc[key] : 'NaN', true);
+							embed.addField(key, bloc[key] && bloc[key].length > 0?bloc[key] : '-', true);
 					}
 				}
 			}

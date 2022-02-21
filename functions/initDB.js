@@ -2,7 +2,7 @@ const Database = require("@replit/database")
 const db = new Database()
 
 module.exports = {
-	InitDB: async (interaction) => {
+	InitDB: async (guildId) => {
 		const sheet = [
 			{
 				"Character": [
@@ -67,12 +67,11 @@ module.exports = {
 		]
 
 		// Init DB if Empty
-		db.get(interaction.member.guild.id).then(bd => {
-		  //if (!bd) {
-			//console.log(sheet);
+		db.get(guildId).then(bd => {
+		  if (!bd) {
 				array = { "defaultDice": 100, "dm": [], "sheet": sheet }
-		    db.set(interaction.member.guild.id, array);
-		  //}
+		    db.set(guildId, array);
+		  }
 		})
 	}
 }

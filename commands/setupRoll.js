@@ -1,8 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed } = require('discord.js');
 
-const DB = require("../functions/initDB.js")
-
 const Database = require("@replit/database")
 const db = new Database()
 
@@ -20,8 +18,6 @@ module.exports = {
 		const addDm = interaction.options.getRole('add-dm');
 		const removeDm = interaction.options.getRole('remove-dm');
 		const listDm = interaction.options.getBoolean('list-dm');
-
-		DB.InitDB(interaction);
 
 		if(defaultDice) {
 			let bd = await db.get(interaction.member.guild.id);
