@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed } = require('discord.js');
 
 const BD = require("../functions/initDB.js")
+const sheet = require("../functions/displaySheet.js")
 
 const Database = require("@replit/database")
 const db = new Database()
@@ -29,20 +30,12 @@ module.exports = {
 
 		if(show) {
       const bd = await db.get(interaction.member.guild.id);
-			console.log(bd["sheet"]);
-			console.log(bd["sheet"][0]);
+			
 			if(bd["sheet"]) {
-	      var txt = '';
-	      bd["sheet"].forEach(id => {
-				  txt += '<@&'+ id +'>\n';
-			  });
-	      
-	  		const embed = new MessageEmbed()
-	  			.setColor('#0099ff')
-	  			.setTitle('Character\'s Sheets')
-	  			.setDescription(bd["sheet"].length > 0 && bd["sheet"] ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
+	      const embeds = sheet.DetectArray(bd["sheet"], null);
+				
+				await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
 			}
-			await interaction.reply({ ephemeral: true, embeds: [embed] });
 		}
 		else if(row != null & column != null) {
     	if(create) {
@@ -56,3 +49,4 @@ module.exports = {
 		}
 	},
 };
+
