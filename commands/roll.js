@@ -81,7 +81,8 @@ module.exports = {
       let list = new Map();
       allDices.forEach(d => {
         const tmp = d.split('d');
-        list.set(tmp[1], tmp[0]);
+				console.log(tmp[1]);
+        list.set(tmp[1] != null?tmp[1] : 1, tmp[0]);
       })
 
       let txt = '```Markdown\n';
