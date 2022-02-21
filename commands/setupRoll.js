@@ -4,6 +4,12 @@ const { MessageActionRow, MessageEmbed } = require('discord.js');
 const Database = require("@replit/database")
 const db = new Database()
 
+db.get("dm").then(dm => {
+  if (!dm) {
+    db.set("dm", []);
+  }
+})
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('setup-roll')
@@ -42,17 +48,18 @@ module.exports = {
 		}
     else if(listDm) {
       const list = await db.get("dm");
-      var txt = '';
-      list.forEach(id => {
-			  txt += '<@&'+ id +'>\n';
-		  });
-      
-  		const embed = new MessageEmbed()
-  			.setColor('#0099ff')
-  			.setTitle('Dungeon Master\'s roles')
-  			.setDescription(list.length > 0 ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
-      
-			await interaction.reply({ ephemeral: true, embeds: [embed] });
+			if(list) {
+	      var txt = '';
+	      list.forEach(id => {
+				  txt += '<@&'+ id +'>\n';
+			  });
+			}
+	  		const embed = new MessageEmbed()
+	  			.setColor('#0099ff')
+	  			.setTitle('Dungeon Master\'s roles')
+	  			.setDescription(list.length > 0 && list != null ? txt: 'The list is empty \nUse \'/setup-role add-dm @role\' to add a role');
+	      
+				await interaction.reply({ ephemeral: true, embeds: [embed] });
 		}
 	},
 };
