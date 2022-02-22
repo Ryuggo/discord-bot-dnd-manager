@@ -10,7 +10,6 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('setup-character')
 		.setDescription('Edit Character Sheet')
-		.addBooleanOption(option => option.setName('show').setDescription('Show the actual sheet'))
 	/*
 		.addIntegerOption(option => option.setName('row').setDescription('Select the row'))
 		.addIntegerOption(option => option.setName('column').setDescription('Select the column'))
@@ -20,35 +19,39 @@ module.exports = {
 	*/
 		,
 	async execute(interaction) {
-		const show = interaction.options.getBoolean('show');
-		/*
-		const row = interaction.options.getInteger('row');
-		const column = interaction.options.getInteger('column');
-		const create = interaction.options.getBoolean('create');
-		const edit = interaction.options.getBoolean('edit');
-		const remove = interaction.options.getBoolean('remove');
-		*/
+		if(interaction.member.user.id == interaction.member.guild.ownerId) {
+			/*
+			const row = interaction.options.getInteger('row');
+			const column = interaction.options.getInteger('column');
+			const create = interaction.options.getBoolean('create');
+			const edit = interaction.options.getBoolean('edit');
+			const remove = interaction.options.getBoolean('remove');
 
-		//if(show) {
-      const bd = await db.get(interaction.member.guild.id);
-			
-			if(bd["sheet"]) {
-	      const embeds = sheet.DetectArray(bd["sheet"], null);
-				
-				await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
-			}
-		/*}
-		else if(row != null & column != null) {
-    	if(create) {
-			}
-	    else if(removeDm) {
-			}
-	    else if(edit) {
-			}
-	    else if(remove) {
+			if(row != null & column != null) {
+	    	if(create) {
+				}
+		    else if(removeDm) {
+				}
+		    else if(edit) {
+				}
+		    else if(remove) {
+				}
+				else {
+*/
+		      const bd = await db.get(interaction.member.guild.id);
+					
+					if(bd["sheet"]) {
+			      const embeds = sheet.DetectArray(bd["sheet"], null);
+						
+						await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+					}
+/*
 			}
 		}
 */
+		} else {
+			await interaction.reply({ content: 'You must be the server\'s owner to use this command', ephemeral: true });
+		}
 	},
 };
 
