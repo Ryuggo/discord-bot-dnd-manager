@@ -14,7 +14,7 @@ module.exports = {
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
 		.addIntegerOption(option => option.setName('select').setDescription('Select a character to use its stats'))
 		.addStringOption(option => option.setName('create').setDescription('Create a Character (Name=value+Sex=value+...)'))
-		.addStringOption(option => option.setName('edit').setDescription('Edit one of your Character'))
+		.addStringOption(option => option.setName('edit').setDescription('Edit one of your Character (NB=0+Name=value+Sex=value+...)'))
 		.addBooleanOption(option => option.setName('list').setDescription('Show all of your Characters'))
 		.addStringOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
@@ -40,27 +40,53 @@ module.exports = {
 				if(!chars) {
 					chars = { "charSelected": 0, "sheets": [] };
 				}
-				const bd = await db.get(interaction.member.guild.id);
 				
-				const tmp = createCh.split('+');
-				let map = new Map();
-				tmp.forEach(t => {
-					const tmp2 = t.split('=');
-					map.set(tmp2[0], tmp2[1]);
-				})
-				sheets = sheet.Update(bd["sheet"], map);
-				
-				chars["sheets"].push(sheets)
-				
-				db.set(interaction.member.user.id, chars);
-				
-				const embeds = sheet.Display(sheets, null, null);
-				await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+				if(chars["sheets"].length < 5) {
+					const bd = await db.get(interaction.member.guild.id);
+					
+					const tmp = createCh.split('+');
+					let map = new Map();
+					tmp.forEach(t => {
+						const tmp2 = t.split('=');
+						map.set(tmp2[0], tmp2[1]);
+					})
+					sheets = sheet.Update(bd["sheet"], map);
+					
+					chars["sheets"].push(sheets)
+					
+					db.set(interaction.member.user.id, chars);
+					
+					const embeds = sheet.Display(sheets, null, null);
+					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+				}
+				else {
+					await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
+				}
 			})
 		}
     else if(editCh) {
-			
-			//await interaction.reply({ content: txt, ephemeral: hidden });
+			db.get(interaction.member.user.id).then(async chars => {
+				if(chars) {
+					const tmp = editCh.split('+');
+					let map = new Map();
+					tmp.forEach(t => {
+						const tmp2 = t.split('=');
+						map.set(tmp2[0], tmp2[1]);
+					})
+					sheets = sheet.Update(chars["sheets"][parseInt(map.get("NB"))], map);
+					
+					chars["sheets"][parseInt(map.get("NB"))] = sheets
+					console.log(sheets[0])
+					
+					db.set(interaction.member.user.id, chars);
+					
+					const embeds = sheet.Display(sheets, null, null);
+					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+				}
+				else {
+					await interaction.reply({ content: 'No Character to Edit \nTry Creating a new one before', ephemeral: true });
+				}
+			})
 		}
     else if(listCh) {
 			const bd = await db.get(interaction.member.user.id);

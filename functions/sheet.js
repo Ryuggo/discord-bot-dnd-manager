@@ -52,7 +52,7 @@ module.exports = {
 				if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 					bloc[key] = this.Update2(bloc[key], map);
 				} else {
-					bloc[key] = map.get(key);
+					bloc[key] = map.get(key) ? map.get(key) : bloc[key];
 				}
 			}
 		});
@@ -63,7 +63,7 @@ module.exports = {
 		for(const bloc of array) {
 			for(let key in bloc) {
 				if(key != 'TOTAL' && bloc[key] != null) {
-					if(bloc[key].length > 1) {
+					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						bloc[key] = this.Update2(bloc[key], map);
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
