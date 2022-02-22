@@ -15,14 +15,14 @@ module.exports = {
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
 		.addBooleanOption(option => option.setName('select').setDescription('Select a character to use its stats'))
 		.addStringOption(option => option.setName('create').setDescription('Create a Character (Name=value+Sex=value+...)'))
-		.addStringOption(option => option.setName('edit').setDescription('Edit one of your Character (NB=0+Name=value+Sex=value+...)'))
+		//.addStringOption(option => option.setName('edit').setDescription('Edit one of your Character (NB=0+Name=value+Sex=value+...)'))
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
 	async execute(interaction) {
 		const showCh = interaction.options.getUser('show');
 		const selectCh = interaction.options.getBoolean('select');
 		const createCh = interaction.options.getString('create');
-		const editCh = interaction.options.getString('edit');
+		//const editCh = interaction.options.getString('edit');
 		const removeCh = interaction.options.getBoolean('remove');
 
 		const row = new MessageActionRow();
@@ -30,11 +30,14 @@ module.exports = {
 			const bd = await db.get(showCh.id);
 			let embeds = [];
 			if (bd) {
+				let i = 0;
 				bd["sheets"].forEach(sheets => {
-					embeds = sheet.Display(sheets, null, "Character");
+					if(bd["charSelected"] == i)
+						embeds = sheet.Display(sheets, null, "Character");
+					i++;
 				});
 			}
-			await interaction.reply({ content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds });
+			await interaction.reply({ content: '```Markdown\n# '+ interaction.member.nickname +' Actual Character\'s Sheet```', ephemeral: true, embeds: embeds });
 		}
     else if(selectCh) {
 			const bd = await db.get(interaction.member.user.id);
