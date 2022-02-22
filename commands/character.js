@@ -16,20 +16,20 @@ module.exports = {
 		.addBooleanOption(option => option.setName('select').setDescription('Select a character to use its stats'))
 		.addStringOption(option => option.setName('create').setDescription('Create a Character (Name=value+Sex=value+...)'))
 		.addStringOption(option => option.setName('edit').setDescription('Edit one of your Character (NB=0+Name=value+Sex=value+...)'))
-		.addIntegerOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
+		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
 	async execute(interaction) {
 		const showCh = interaction.options.getUser('show');
 		const selectCh = interaction.options.getBoolean('select');
 		const createCh = interaction.options.getString('create');
 		const editCh = interaction.options.getString('edit');
-		const removeCh = interaction.options.getInteger('remove');
+		const removeCh = interaction.options.getBoolean('remove');
 
 		const row = new MessageActionRow();
 		if (showCh) {
 			const bd = await db.get(showCh.id);
 			let embeds = [];
-			if (bd["sheets"]) {
+			if (bd) {
 				bd["sheets"].forEach(sheets => {
 					embeds = sheet.Display(sheets, null, "Character");
 				});
@@ -40,7 +40,7 @@ module.exports = {
 			const bd = await db.get(interaction.member.user.id);
 			let embeds = [];
 			const row = new MessageActionRow();
-			if (bd["sheets"]) {
+			if (bd) {
 				let i = 0;
 				bd["sheets"].forEach(sheets => {
 					const embed = sheet.Display(sheets, null, "Character");
@@ -55,9 +55,9 @@ module.exports = {
 					
 					i++;
 				});
-			}
-
-			await interaction.reply({ content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds, components: [row] });
+				await interaction.reply({ content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds, components: [row] });
+			} else
+				await interaction.reply({ content: 'You don\'t have any Character', ephemeral: true });
     }
     else if(createCh) {
 			db.get(interaction.member.user.id).then(async chars => {
@@ -68,7 +68,7 @@ module.exports = {
 				if(chars["sheets"].length < 5) {
 					const bd = await db.get(interaction.member.guild.id);
 					
-					const tmp = createCh.split('+');
+					const tmp = createCh.replace(/(\n)+/g, '').split('+');
 					let map = new Map();
 					tmp.forEach(t => {
 						const tmp2 = t.split('=');
@@ -91,7 +91,7 @@ module.exports = {
     else if(editCh) {
 			db.get(interaction.member.user.id).then(async chars => {
 				if(chars) {
-					const tmp = editCh.split('+');
+					const tmp = editCh.replace(/(\n)+/g, '').split('+');
 					let map = new Map();
 					tmp.forEach(t => {
 						const tmp2 = t.split('=');
@@ -112,18 +112,23 @@ module.exports = {
 			})
 		}
     else if(removeCh) {
-			db.get(interaction.member.user.id).then(async chars => {
-				if(chars) {
-					chars["sheets"].splice(removeCh-1, 1);
+			const bd = await db.get(interaction.member.user.id);
+			let embeds = [];
+			const row = new MessageActionRow();
+			if(bd) {
+				let i = 0;
+				bd["sheets"].forEach(sheets => {
+					const embed = sheet.Display(sheets, null, "Character");
+					embeds.push(embed[0])
 					
-					db.set(interaction.member.user.id, chars);
-					
-					await interaction.reply({ content: 'Character Deleted', ephemeral: true });
-				}
-				else {
-					await interaction.reply({ content: 'You don\'t have any Character', ephemeral: true });
-				}
-			})
+					row.addComponents(CreateButton.ButtonDanger(i.toString(), 'characterRemove-', embed[0].fields[0].value));
+					i++;
+				});
+				await interaction.reply({ content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds, components: [row] });
+			}
+			else {
+				await interaction.reply({ content: 'You don\'t have any Character', ephemeral: true });
+			}
 		}	
 	},
 };
