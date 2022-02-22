@@ -6,8 +6,8 @@ module.exports = {
 		const sheet = [
 			{
 				"Character": [
-					{"Name": "", "Sex": "", "Age": ""},
-					{"Origin": "", "Race": ""},
+					{"Name": -1, "Sex": -1, "Age": -1},
+					{"Origin": -1, "Race": -1},
 				],
 			},
 			{
@@ -15,23 +15,23 @@ module.exports = {
 					{
 						"Physical": [
 							{"TOTAL": 200},
-							{"Agility": 0, "Strength": 0, "Perception": 0},
-							{"Mental": 0},
+							{"Agility": -1, "Strength": -1, "Perception": -1},
+							{"Mental": -1},
 						],
 					},
 					{
 						"Fight": [
 							{"TOTAL": 120},
-							{"1 Hand/ Light": 0, "2 Hands/ Heavy": 0, "Shield/ Protection": 0},
-							{"Bow/ Range": 0},
+							{"1 Hand/ Light": -1, "2 Hands/ Heavy": -1, "Shield/ Protection": -1},
+							{"Bow/ Range": -1},
 						],
 					},
 					{
 						"Magic": [
 							{"TOTAL": 100},
-							{"Water": 0, "Earth": 0, "Air": 0},
-							{"Lightning": 0, "Darkness": 0, "Light": 0},
-							{"Fire": 0},
+							{"Water": -1, "Earth": -1, "Air": -1},
+							{"Lightning": -1, "Darkness": -1, "Light": -1},
+							{"Fire": -1},
 						],
 					},
 				],
@@ -49,8 +49,8 @@ module.exports = {
 				"Game": [
 					{
 						"Stats": [
-							{"HP": 0, "Dmg": 0, "Armor": 0},
-							{"MP": 0, "Coin": 0},
+							{"HP": 20, "Dmg": 4, "Armor": -1},
+							{"MP": -1, "Coin": -1},
 						],
 					},
 					{
@@ -58,8 +58,8 @@ module.exports = {
 					},
 					{
 						"Score": [
-							{"Kill": 0, "Death": 0, "Fights": 0},
-							{"Total Damage": 0, "Max Damage": 0},
+							{"Kill": -1, "Death": -1, "Fights": -1},
+							{"Total Damage": -1, "Max Damage": -1},
 						],
 					},
 				],
@@ -68,10 +68,10 @@ module.exports = {
 
 		// Init DB if Empty
 		db.get(guildId).then(bd => {
-		  if (!bd) {
+		  //if (!bd) {
 				array = { "defaultDice": 100, "dm": [], "sheet": sheet }
 		    db.set(guildId, array);
-		  }
+		  //}
 		})
 	}
 }

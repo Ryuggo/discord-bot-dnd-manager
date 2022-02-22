@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageEmbed } = require('discord.js');
 
-const sheet = require("../functions/displaySheet.js")
+const sheet = require("../functions/sheet.js")
 
 const Database = require("@replit/database")
 const db = new Database()
@@ -41,7 +41,7 @@ module.exports = {
 		      const bd = await db.get(interaction.member.guild.id);
 					
 					if(bd["sheet"]) {
-			      const embeds = sheet.DetectArray(bd["sheet"], null);
+			      const embeds = sheet.Display(bd["sheet"], null, null);
 						
 						await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
 					}
