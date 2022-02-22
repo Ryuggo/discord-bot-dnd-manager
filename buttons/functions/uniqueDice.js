@@ -1,7 +1,7 @@
 module.exports = {
-	WriteEmbed: (interaction) => {
+	WriteEmbed: (interaction, dice) => {
 	  const description = interaction.message.embeds[0].description;
-	  const rdm = Math.floor(Math.random() * parseInt(interaction.customId) + 1);
+	  const rdm = Math.floor(Math.random() * dice + 1);
 	  
 	  let txt = '';
 	  if(description !== 'Select a dice to roll!') {
@@ -30,7 +30,7 @@ module.exports = {
 	    for(let [key, value] of list) {
 				let txtDices = '';
 	      if(key === '<@'+interaction.member.user.id+'>')
-	      	txtDices = '**'+ value[0].replace(/(\*)+/g, '') +' ('+ (interaction.customId.toString()).replace('u', '') +')**';
+	      	txtDices = '**'+ value[0].replace(/(\*)+/g, '') +' ('+ dice +')**';
 				else
 	      	txtDices = '**'+ value[0].replace(/(\*)+/g, '') +'**';
 				
@@ -44,7 +44,7 @@ module.exports = {
 	    }
 	  }
 	  else {
-	    txt = '<@'+ interaction.member.user.id +'> => **'+ rdm +' ('+ (interaction.customId.toString()).replace('u', '') +')**';
+	    txt = '<@'+ interaction.member.user.id +'> => **'+ rdm +' ('+ dice +')**';
 	  }
 	  return txt;
 	}

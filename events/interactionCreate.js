@@ -36,11 +36,12 @@ module.exports = {
 				interaction.client.button.set(button.data.label, button);
 			}
 
-			const button = interaction.client.button.get(interaction.customId);
+			const btn = interaction.customId.split('-')
+			const button = interaction.client.button.get(btn[0]);
 			if (!button) return;
 
 			try {
-				button.execute(interaction);
+				button.execute(interaction, btn[1]);
 			} catch (error) {
 				console.error(error);
 				interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });

@@ -1,30 +1,30 @@
 const { MessageButton } = require('discord.js');
 
 module.exports = {
-	ButtonPrimary: (number) => {
+	ButtonPrimary: (number, command) => {
 		return new MessageButton()
-			.setCustomId(number)
+			.setCustomId(command + number)
 			.setLabel(number)
 			.setStyle('PRIMARY');
 	},
 	
-	ButtonSecondary: (number) => {
+	ButtonSecondary: (number, command) => {
 		return new MessageButton()
-			.setCustomId(number)
+			.setCustomId(command + number)
 			.setLabel(number)
 			.setStyle('SECONDARY');
 	},
 	
-	ButtonSuccess: (number) => {
+	ButtonSuccess: (number, command) => {
 		return new MessageButton()
-			.setCustomId(number + 'u')
+			.setCustomId(command + number)
 			.setLabel(number)
 			.setStyle('SUCCESS');
 	},
 	
-	ButtonDanger: (number) => {
+	ButtonDanger: (number, command) => {
 		return new MessageButton()
-			.setCustomId(number)
+			.setCustomId(command + number)
 			.setLabel(number)
 			.setStyle('DANGER');
 	}
