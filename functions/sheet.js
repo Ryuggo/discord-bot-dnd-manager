@@ -15,7 +15,6 @@ module.exports = {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						embed = (this.Display2(bloc[key], embed));
 					} else {
-						console.log(key)
 						embed.setDescription(bloc[key] && bloc[key].length > 0?bloc[key] : '=');
 					}
 				}
