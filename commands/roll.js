@@ -28,38 +28,38 @@ module.exports = {
 			switch(sets) {
 				case 1:
 					row.addComponents(
-						CreateButton.ButtonPrimary('2', 'roll-'),
-						CreateButton.ButtonPrimary('4', 'roll-'),
-						CreateButton.ButtonPrimary('6', 'roll-'),
-						CreateButton.ButtonPrimary('8', 'roll-'),
+						CreateButton.ButtonPrimary('2', 'roll-', '2'),
+						CreateButton.ButtonPrimary('4', 'roll-', '4'),
+						CreateButton.ButtonPrimary('6', 'roll-', '6'),
+						CreateButton.ButtonPrimary('8', 'roll-', '8'),
 						);
 					break;
 				case 2:
 					row.addComponents(
-						CreateButton.ButtonPrimary('10', 'roll-'),
-						CreateButton.ButtonPrimary('12', 'roll-'),
-						CreateButton.ButtonPrimary('20', 'roll-'),
-						CreateButton.ButtonPrimary('100', 'roll-'),
+						CreateButton.ButtonPrimary('10', 'roll-', '10'),
+						CreateButton.ButtonPrimary('12', 'roll-', '12'),
+						CreateButton.ButtonPrimary('20', 'roll-', '20'),
+						CreateButton.ButtonPrimary('100', 'roll-', '100'),
 						);
 					break;
 				default:
 					row.addComponents(
-						CreateButton.ButtonPrimary('6', 'roll-'),
-						CreateButton.ButtonPrimary('10', 'roll-'),
-						CreateButton.ButtonPrimary('12', 'roll-'),
-						CreateButton.ButtonPrimary('20', 'roll-'),
-						CreateButton.ButtonPrimary('100', 'roll-'),
+						CreateButton.ButtonPrimary('6', 'roll-', '6'),
+						CreateButton.ButtonPrimary('10', 'roll-', '10'),
+						CreateButton.ButtonPrimary('12', 'roll-', '12'),
+						CreateButton.ButtonPrimary('20', 'roll-', '20'),
+						CreateButton.ButtonPrimary('100', 'roll-', '100'),
 						);
 			}
 			await interaction.reply({ content: 'Select a dice to roll!', ephemeral: true, components: [row] });
 		}
     else if(unique) {
       row.addComponents(
-				CreateButton.ButtonSuccess('4', 'rollu-'),
-				CreateButton.ButtonSuccess('6', 'rollu-'),
-				CreateButton.ButtonSuccess('12', 'rollu-'),
-				CreateButton.ButtonSuccess('20', 'rollu-'),
-				CreateButton.ButtonSuccess('100', 'rollu-'),
+				CreateButton.ButtonSuccess('4', 'rollu-', '4'),
+				CreateButton.ButtonSuccess('6', 'rollu-', '6'),
+				CreateButton.ButtonSuccess('12', 'rollu-', '12'),
+				CreateButton.ButtonSuccess('20', 'rollu-', '20'),
+				CreateButton.ButtonSuccess('100', 'rollu-', '100'),
         );
 
       const embed = new MessageEmbed()

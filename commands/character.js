@@ -41,12 +41,19 @@ module.exports = {
 			let embeds = [];
 			const row = new MessageActionRow();
 			if (bd["sheets"]) {
+				let i = 0;
 				bd["sheets"].forEach(sheets => {
 					const embed = sheet.Display(sheets, null, "Character");
-				
 					embeds.push(embed[0])
+
+					if(bd["charSelected"] == i) {
+						row.addComponents(CreateButton.ButtonSuccess(i.toString(), 'character-', embed[0].fields[0].value));
+					}
+					else {
+						row.addComponents(CreateButton.ButtonPrimary(i.toString(), 'character-', embed[0].fields[0].value));
+					}
 					
-					row.addComponents(CreateButton.ButtonPrimary(embed[0].fields[0].value, 'character-'));
+					i++;
 				});
 			}
 
@@ -93,7 +100,6 @@ module.exports = {
 					sheets = sheet.Update(chars["sheets"][parseInt(map.get("NB"))], map);
 					
 					chars["sheets"][parseInt(map.get("NB"))] = sheets
-					console.log(sheets[0])
 					
 					db.set(interaction.member.user.id, chars);
 					
