@@ -1,5 +1,7 @@
 const { ButtonComponent } = require('@discordjs/builders');
 
+const display = require("./functions/displaySheets.js");
+
 const Database = require("@replit/database")
 const db = new Database()
 
@@ -23,7 +25,9 @@ module.exports = {
 			bd["sheets"].splice(nb, 1);
 			
 			db.set(interaction.member.user.id, bd);
+
+			const array = display.Display(bd, null)
 			
-      await interaction.reply({ content: 'Character Deleted : ' + name, ephemeral: true });
+      await interaction.update(array);
     },
 };

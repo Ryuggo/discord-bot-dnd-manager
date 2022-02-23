@@ -1,5 +1,7 @@
 const { ButtonComponent } = require('@discordjs/builders');
 
+const display = require("./functions/displaySheets.js");
+
 const Database = require("@replit/database")
 const db = new Database()
 
@@ -15,14 +17,16 @@ module.exports = {
 			let name = '';
 			let i = 0;
 			bd["sheets"].forEach(sheets => {
-				if(i == nb) name = sheets[0].Character[0].Name;
+				if(i == nb) name = sheets[0].Character[1].Name;
 				i++;
 			});
 
 			db.set(interaction.member.user.id, bd);
 			if (interaction.member.user.id !== interaction.member.guild.ownerId)
 				interaction.member.setNickname(name);
+
+			const array = display.Display(bd, null)
 			
-      await interaction.reply({ content: 'You\'re now playing with : ' + name, ephemeral: true });
+      await interaction.update(array);
     },
 };

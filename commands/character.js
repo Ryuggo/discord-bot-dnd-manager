@@ -3,6 +3,7 @@ const { MessageActionRow, MessageEmbed, MessageButton } = require('discord.js');
 
 const CreateButton = require("../functions/messageButton.js")
 const sheet = require("../functions/sheet.js")
+const display = require("../buttons/functions/displaySheets.js")
 
 const Database = require("@replit/database")
 const db = new Database()
@@ -79,30 +80,40 @@ module.exports = {
 		}
     else {
 			const bd = await db.get(interaction.member.user.id);
-			let embeds = [];
-			const row = new MessageActionRow();
-			const btn = 'character-';
 			if (bd && bd["sheets"].length > 0) {
-				let i = 0;
-				bd["sheets"].forEach(sheets => {
-					const embed = sheet.Display(sheets, null, "Character");
-					embeds.push(embed[0])
-
-					if(removeCh) {
-						row.addComponents(CreateButton.ButtonDanger( i.toString(), 'characterRemove-', embed[0].fields[0].value));
-					}
-					else {
-						if(bd["charSelected"] == i)
-							row.addComponents(CreateButton.ButtonSuccess( i.toString(), btn, embed[0].fields[0].value));
-						else
-							row.addComponents(CreateButton.ButtonPrimary( i.toString(), btn, embed[0].fields[0].value));
-					}
-					
-					i++;
-				});
-				await interaction.reply({ content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds, components: [row] });
+				const array = display.Display(bd, removeCh);
+				
+				await interaction.reply(array);
 			} else
 				await interaction.reply({ content: 'You don\'t have any Character', ephemeral: true });
     }
 	},
 };
+
+
+/*
+function displaySheets(bd, removeCh) {
+	let embeds = [];
+	const row = new MessageActionRow();
+	const btn = 'character-';
+	let i = 0;
+	bd["sheets"].forEach(sheets => {
+		const embed = sheet.Display(sheets, null, "Character");
+		embeds.push(embed[0])
+
+		if(removeCh) {
+			row.addComponents(CreateButton.ButtonDanger( i.toString(), 'characterRemove-', embed[0].fields[0].value));
+		}
+		else {
+			if(bd["charSelected"] == i)
+				row.addComponents(CreateButton.ButtonSuccess( i.toString(), btn, embed[0].fields[0].value));
+			else
+				row.addComponents(CreateButton.ButtonPrimary( i.toString(), btn, embed[0].fields[0].value));
+		}
+		
+		i++;
+	});
+
+	return { content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds, components: [row] };
+}
+*/
