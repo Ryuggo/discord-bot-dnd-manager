@@ -1,5 +1,7 @@
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+// Time intervals less than 1 min is considered api spam and is against Discord TOS
+
 module.exports = {
 	RoleColor: async (role) => {
 		/*
@@ -15,16 +17,13 @@ module.exports = {
 
 		let i = 1;
 		let j = 2;
-		let k = 51;
+		let k = 4;
 		
-		let r = 204;
-		let g = 51;
-		let b = 0;
-		let rgb = [204, 51, 0];
+		let rgb = [204, 52, 0];
 		let txt = '#cc3300'
 		while(true) {
-			console.log(role.color + ' - ' + txt);
-			await delay(5000);
+			//console.log(role.color + ' - ' + txt + ' - ' + rgb);
+			await delay(200);
 			role.edit({
 					color: rgbToHex(rgb[0], rgb[1], rgb[2])
 			})
