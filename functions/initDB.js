@@ -73,10 +73,9 @@ module.exports = {
 
 		// Init DB if Empty
 		db.get(guildId).then(bd => {
-		  //if (!bd) {
-				array = { "defaultDice": 100, "dm": [], "sheet": sheet }
-		    db.set(guildId, array);
-		  //}
+		  if (!bd)
+				bd = { "defaultDice": 100, "dm": [], "sheet": sheet }
+		  db.set(guildId, bd);
 		})
 	}
 }

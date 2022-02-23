@@ -25,13 +25,17 @@ module.exports = {
 			const bd = await db.get(showCh.id);
 			let embeds = [];
 			if (bd && bd["sheets"].length > 0) {
+				let category = "Character";
+				if(setCh)
+					category = setCh == 'null'?null : setCh;
+				
 				let i = 0;
 				bd["sheets"].forEach(sheets => {
 					if(bd["charSelected"] == i) {
-						if(showCh == interaction.user.id)
+						if(showCh == interaction.user.id || (interaction.user.id == interaction.member.guild.ownerId && !setCh))
 							embeds = sheet.Display(sheets, null, null);
 						else
-							embeds = sheet.Display(sheets, null, "Character");
+							embeds = sheet.Display(sheets, null, category);
 					}
 					i++;
 				});
