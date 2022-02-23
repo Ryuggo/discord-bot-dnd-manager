@@ -6,12 +6,15 @@ module.exports = {
 		const sheet = [
 			{
 				"Character": [
+					{"COLOR": "#0586f0"},
 					{"Name": -1, "Sex": -1, "Age": -1},
 					{"Origin": -1, "Race": -1},
+					{"imageURL": ""},
 				],
 			},
 			{
 				"Stats": [
+					{"COLOR": "#05f028"},
 					{
 						"Physical": [
 							{"TOTAL": 200},
@@ -41,12 +44,14 @@ module.exports = {
 			},
 			{
 				"Skills": [
+					{"COLOR": "#e005f0"},
 					{"TOTAL": 5},
 					{"List": []},
 				],
 			},
 			{
 				"Game": [
+					{"COLOR": "#f09605"},
 					{
 						"Stats": [
 							{"HP": 20, "Dmg": 4, "Armor": -1},

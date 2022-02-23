@@ -7,7 +7,6 @@ module.exports = {
 			for(let key in bloc) {
 				if(name == null || name == key) {
 					embed = new MessageEmbed()
-					.setColor('#0099ff')
 					.setTitle(key);
 	
 					embeds.push(embed);
@@ -15,7 +14,8 @@ module.exports = {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						embed = (this.Display2(bloc[key], embed));
 					} else {
-						embed.setDescription(bloc[key] && bloc[key].length > 0?bloc[key] : '=');
+						embed.setDescription(bloc[key] && bloc[key].length > 0?bloc[key] : '=')
+							.setColor("#05f0f0");
 					}
 				}
 			}
@@ -26,7 +26,7 @@ module.exports = {
 	Display2 (array, embed) {
 		for(const bloc of array) {
 			for(let key in bloc) {
-				if(key != 'TOTAL' && bloc[key] != null) {
+				if(key != 'TOTAL' && key != 'COLOR' && key != 'imageURL' && bloc[key] != null) {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string' && typeof bloc[key] !== 'char') {
 						embed.addField('__'+ key +'__', '-_-_-_-_-_-_-', false);
 						embed = (this.Display2(bloc[key], embed));
@@ -39,6 +39,12 @@ module.exports = {
 						}
 					}
 				}
+				else if(key == 'COLOR') {
+					embed.setColor(bloc[key]);
+				}
+				else if(key == 'imageURL') {
+					embed.setThumbnail(bloc[key]);
+				}
 			}
 		}
 		return embed;
@@ -48,10 +54,12 @@ module.exports = {
 	Update (array, map) {
 		array.forEach(bloc => {
 			for(let key in bloc) {
-				if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
-					bloc[key] = this.Update2(bloc[key], map);
-				} else {
-					bloc[key] = map.get(key) ? map.get(key) : bloc[key];
+				if(key != 'Skills' && key != 'Game') {
+					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
+						bloc[key] = this.Update2(bloc[key], map);
+					} else {
+						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
+					}
 				}
 			}
 		});
@@ -61,7 +69,7 @@ module.exports = {
 	Update2 (array, map) {
 		for(const bloc of array) {
 			for(let key in bloc) {
-				if(key != 'TOTAL' && bloc[key] != null) {
+				if(key != 'TOTAL' && key != 'COLOR' && bloc[key] != null) {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						bloc[key] = this.Update2(bloc[key], map);
 					} else {

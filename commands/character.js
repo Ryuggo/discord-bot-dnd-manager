@@ -39,38 +39,36 @@ module.exports = {
 			await interaction.reply({ content: '<@'+ showCh +'>  Actual Character\'s Sheet', ephemeral: true, embeds: embeds });
 		}
     else if(setCh) {
-			db.get(interaction.member.user.id).then(async chars => {
-				if(!chars) {
-					chars = { "charSelected": 0, "sheets": [] };
-				}
-				
-				if(chars["sheets"].length < 5) {
-					const bd = await db.get(interaction.member.guild.id);
-					
-					const tmp = setCh.replace(/(\n)+/g, '').split('+');
-					let map = new Map();
-					tmp.forEach(t => {
-						const tmp2 = t.split('=');
-						map.set(tmp2[0], tmp2[1]);
-					})
-					
-					if(map.get("NB")) {
-						sheets = sheet.Update(chars["sheets"][parseInt(map.get("NB"))], map);
-					}
-					else {
-						sheets = sheet.Update(bd["sheet"], map);
-						chars["sheets"].push(sheets)
-					}
-					
-					db.set(interaction.member.user.id, chars);
-					
-					const embeds = sheet.Display(sheets, null, null);
-					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+			const bd = await db.get(interaction.member.user.id)
+			if(!bd) {
+				bd = { "charSelected": 0, "sheets": [] };
+			}
+			
+			if(bd["sheets"].length < 5) {
+				const tmp = setCh.replace(/(\n)+/g, '').split('+');
+				let map = new Map();
+				tmp.forEach(t => {
+					const tmp2 = t.split('=');
+					map.set(tmp2[0], tmp2[1]);
+				})
+
+				if(map.get("NB")) {
+					sheets = sheet.Update(bd["sheets"][parseInt(map.get("NB"))], map);
 				}
 				else {
-					await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
+					const bdBlank = await db.get(interaction.guild.id)
+					sheets = sheet.Update(bdBlank["sheet"], map);
+					bd["sheets"].push(sheets)
 				}
-			})
+				
+				db.set(interaction.member.user.id, bd);
+				
+				const embeds = sheet.Display(sheets, null, null);
+				await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+			}
+			else {
+				await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
+			}
 		}
     else {
 			const bd = await db.get(interaction.member.user.id);
