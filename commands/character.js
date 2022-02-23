@@ -24,7 +24,7 @@ module.exports = {
 		if (showCh) {
 			const bd = await db.get(showCh.id);
 			let embeds = [];
-			if (bd) {
+			if (bd && bd["sheets"].length > 0) {
 				let i = 0;
 				bd["sheets"].forEach(sheets => {
 					if(bd["charSelected"] == i) {
@@ -35,8 +35,11 @@ module.exports = {
 					}
 					i++;
 				});
+				await interaction.reply({ content: '<@'+ showCh +'>  Actual Character\'s Sheet', ephemeral: true, embeds: embeds });
 			}
-			await interaction.reply({ content: '<@'+ showCh +'>  Actual Character\'s Sheet', ephemeral: true, embeds: embeds });
+			else {
+			await interaction.reply({ content: '<@'+ showCh +'> doesn\'t have any Character', ephemeral: true });
+			}
 		}
     else if(setCh) {
 			const bd = await db.get(interaction.member.user.id)
@@ -75,7 +78,7 @@ module.exports = {
 			let embeds = [];
 			const row = new MessageActionRow();
 			const btn = 'character-';
-			if (bd) {
+			if (bd && bd["sheets"].length > 0) {
 				let i = 0;
 				bd["sheets"].forEach(sheets => {
 					const embed = sheet.Display(sheets, null, "Character");
