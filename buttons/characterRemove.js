@@ -14,9 +14,11 @@ module.exports = {
 			let name = '';
 			let i = 0;
 			bd["sheets"].forEach(sheets => {
-				if(i == nb) name = sheets[0].Character[0].Name;
+				if(i == nb) name = sheets[0].Character[1].Name;
 				i++;
 			});
+
+			if(bd["charSelected"] == nb) bd["charSelected"] = 0;
 			
 			bd["sheets"].splice(nb, 1);
 			
