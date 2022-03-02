@@ -13,41 +13,24 @@ module.exports = {
 		.setName('character')
 		.setDescription('Create and Manage Characters for the tabletop RPG')
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
+		.addStringOption(option => option.setName('select').setDescription('Select the part of the sheet you want to see (DM only)'))
 		.addStringOption(option => option.setName('set').setDescription('Create/ Edit a Character [(NB=0+)Name=value+Sex=value+...]'))
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
 	async execute(interaction) {
 		const showCh = interaction.options.getUser('show');
+		const selectCh = interaction.options.getString('select');
 		const setCh = interaction.options.getString('set');
 		const removeCh = interaction.options.getBoolean('remove');
 
 		const row = new MessageActionRow();
-		if (showCh) {
-			const bd = await db.get(showCh.id);
-			let embeds = [];
-			if (bd && bd["sheets"].length > 0) {
-				let category = "Character";
-				if(setCh)
-					category = setCh == 'null'?null : setCh;
-				
-				let i = 0;
-				bd["sheets"].forEach(sheets => {
-					if(bd["charSelected"] == i) {
-						if(showCh == interaction.user.id || (interaction.user.id == interaction.member.guild.ownerId && !setCh))
-							embeds = sheet.Display(sheets, null, null);
-						else
-							embeds = sheet.Display(sheets, null, category);
-					}
-					i++;
-				});
-				await interaction.reply({ content: '<@'+ showCh +'>  Actual Character\'s Sheet', ephemeral: true, embeds: embeds });
-			}
-			else {
-			await interaction.reply({ content: '<@'+ showCh +'> doesn\'t have any Character', ephemeral: true });
-			}
-		}
-    else if(setCh) {
-			const bd = await db.get(interaction.member.user.id)
+    if(setCh) {
+			let bd;
+			if(showCh)
+				bd = await db.get(showCh.id)
+			else
+				bd = await db.get(interaction.member.user.id)
+			
 			if(!bd) {
 				bd = { "charSelected": 0, "sheets": [] };
 			}
@@ -87,7 +70,10 @@ module.exports = {
 	      bd2 = await db.get(interaction.member.guild.id);
 	      const list = bd2["dm"];
 				if(sheets[1]["Stats"][1]["GOOD"] == 'OK' || (list && interaction.member._roles.some(i => list.includes(i)))) {
-					db.set(interaction.member.user.id, bd);
+					if(showCh)
+						db.set(showCh.id, bd);
+					else
+						db.set(interaction.member.user.id, bd);
 					
 					const embeds = sheet.Display(sheets, null, null);
 					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
@@ -97,6 +83,30 @@ module.exports = {
 			}
 			else {
 				await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
+			}
+		}
+		else if (showCh) {
+			const bd = await db.get(showCh.id);
+			let embeds = [];
+			if (bd && bd["sheets"].length > 0) {
+				let category = null;
+				if(selectCh)
+					category = selectCh == 'null'?null : selectCh;
+				
+				let i = 0;
+				bd["sheets"].forEach(sheets => {
+					if(bd["charSelected"] == i) {
+						if(showCh.id == interaction.user.id || (interaction.user.id == interaction.member.guild.ownerId && !selectCh))
+							embeds = sheet.Display(sheets, null, null);
+						else
+							embeds = sheet.Display(sheets, null, category);
+					}
+					i++;
+				});
+				await interaction.reply({ content: '<@'+ showCh +'>  Actual Character\'s Sheet', ephemeral: true, embeds: embeds });
+			}
+			else {
+			await interaction.reply({ content: '<@'+ showCh +'> doesn\'t have any Character', ephemeral: true });
 			}
 		}
     else {
