@@ -83,7 +83,6 @@ module.exports = {
 					sheets[1]["Stats"][1]["GOOD"] = 'NO';
 					sheets[1]["Stats"][4]["Magic"].splice(0,1);
 				}
-				console.log(sheets[1]["Stats"][4][0])
 					
 	      bd2 = await db.get(interaction.member.guild.id);
 	      const list = bd2["dm"];
@@ -95,28 +94,6 @@ module.exports = {
 				}
 				else
 					await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
-				/*
-				if(list) {
-					if(sheets[1]["Stats"][1]["GOOD"] == 'OK' || interaction.member._roles.some(i => list.includes(i))) {
-						db.set(interaction.member.user.id, bd);
-						
-						const embeds = sheet.Display(sheets, null, null);
-						await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
-					}
-					else
-						await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
-				}
-				else {
-					if(sheets[1]["Stats"][1]["GOOD"] == 'OK') {
-						db.set(interaction.member.user.id, bd);
-						
-						const embeds = sheet.Display(sheets, null, null);
-						await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
-					}
-					else
-						await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
-				}
-*/
 			}
 			else {
 				await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
@@ -133,31 +110,3 @@ module.exports = {
     }
 	},
 };
-
-
-/*
-function displaySheets(bd, removeCh) {
-	let embeds = [];
-	const row = new MessageActionRow();
-	const btn = 'character-';
-	let i = 0;
-	bd["sheets"].forEach(sheets => {
-		const embed = sheet.Display(sheets, null, "Character");
-		embeds.push(embed[0])
-
-		if(removeCh) {
-			row.addComponents(CreateButton.ButtonDanger( i.toString(), 'characterRemove-', embed[0].fields[0].value));
-		}
-		else {
-			if(bd["charSelected"] == i)
-				row.addComponents(CreateButton.ButtonSuccess( i.toString(), btn, embed[0].fields[0].value));
-			else
-				row.addComponents(CreateButton.ButtonPrimary( i.toString(), btn, embed[0].fields[0].value));
-		}
-		
-		i++;
-	});
-
-	return { content: '```Markdown\n# Character\'s Sheets```', ephemeral: true, embeds: embeds, components: [row] };
-}
-*/

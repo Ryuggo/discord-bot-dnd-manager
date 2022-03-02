@@ -18,8 +18,10 @@ module.exports = {
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove the stat'))
 	*/
 		,
-	async execute(interaction) {
-		if(interaction.member.user.id == interaction.member.guild.ownerId) {
+	async execute(interaction) {bd2 = await db.get(interaction.member.guild.id);
+	      const list = bd2["dm"];
+				if(sheets[1]["Stats"][1]["GOOD"] == 'OK' || (list && interaction.member._roles.some(i => list.includes(i)))) {
+		if(interaction.member.user.id == interaction.member.guild.ownerId || ) {
 			/*
 			const row = interaction.options.getInteger('row');
 			const column = interaction.options.getInteger('column');

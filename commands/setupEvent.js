@@ -11,7 +11,9 @@ module.exports = {
 		.addChannelOption(option => option.setName('launch').setDescription('Launch an event'))
 		,
 	async execute(interaction) {
-		if(interaction.member.user.id == interaction.member.guild.ownerId) {
+		bd2 = await db.get(interaction.member.guild.id);
+		const list = bd2["dm"];
+		if(interaction.member.user.id == interaction.member.guild.ownerId || (list && interaction.member._roles.some(i => list.includes(i)))) {
 			const row = interaction.options.getChannel('launch');
 			/*
 			const column = interaction.options.getInteger('column');

@@ -14,7 +14,9 @@ module.exports = {
 		.addBooleanOption(option => option.setName('list-dm').setDescription('Get a list of Dungeon Master\'s roles'))
 		,
 	async execute(interaction) {
-		if(interaction.member.user.id == interaction.member.guild.ownerId) {
+		bd2 = await db.get(interaction.member.guild.id);
+		const list = bd2["dm"];
+		if(interaction.member.user.id == interaction.member.guild.ownerId || (list && interaction.member._roles.some(i => list.includes(i)))) {
 			const defaultDice = interaction.options.getInteger('default');
 			const addDm = interaction.options.getRole('add-dm');
 			const removeDm = interaction.options.getRole('remove-dm');
