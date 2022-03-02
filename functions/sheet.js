@@ -1,6 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
+	let total = 0;
+
 	Display (array, embed, name) {
 		let embeds = [];
 		array.forEach(bloc => {

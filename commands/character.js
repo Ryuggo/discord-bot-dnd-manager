@@ -60,6 +60,7 @@ module.exports = {
 					map.set(tmp2[0], tmp2[1]);
 				})
 
+				let sheets
 				if(map.get("NB")) {
 					sheets = sheet.Update(bd["sheets"][parseInt(map.get("NB"))], map);
 				}
