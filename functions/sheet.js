@@ -1,8 +1,7 @@
 const { MessageEmbed } = require('discord.js');
+let total = 0;
 
 module.exports = {
-	let total = 0;
-
 	Display (array, embed, name) {
 		let embeds = [];
 		array.forEach(bloc => {
@@ -59,6 +58,7 @@ module.exports = {
 				if(key != 'Skills' && key != 'Game') {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						bloc[key] = this.Update2(bloc[key], map);
+						if(bloc[key] == null) return null;
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
 					}
@@ -69,14 +69,25 @@ module.exports = {
 	},
 	
 	Update2 (array, map) {
+		let actual = -1;
 		for(const bloc of array) {
 			for(let key in bloc) {
 				if(key != 'TOTAL' && key != 'COLOR' && bloc[key] != null) {
+					console.log(total + " - " + actual);
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						bloc[key] = this.Update2(bloc[key], map);
+						if(bloc[key] == null) return null;
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
+						if(actual != -1) {
+							actual += parseInt(bloc[key]);
+							if(actual > total) return null;
+						}
 					}
+				}
+				else if(key == 'TOTAL') {
+					total = bloc[key];
+					actual = 0;
 				}
 			}
 		}

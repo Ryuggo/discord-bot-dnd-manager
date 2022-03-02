@@ -60,7 +60,7 @@ module.exports = {
 					map.set(tmp2[0], tmp2[1]);
 				})
 
-				let sheets
+				let sheets;
 				if(map.get("NB")) {
 					sheets = sheet.Update(bd["sheets"][parseInt(map.get("NB"))], map);
 				}
@@ -69,11 +69,15 @@ module.exports = {
 					sheets = sheet.Update(bdBlank["sheet"], map);
 					bd["sheets"].push(sheets)
 				}
-				
-				db.set(interaction.member.user.id, bd);
-				
-				const embeds = sheet.Display(sheets, null, null);
-				await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+console.log(sheets[1]["Stats"]);
+				if(sheets[1]["Stats"] != null) {
+					db.set(interaction.member.user.id, bd);
+					
+					const embeds = sheet.Display(sheets, null, null);
+					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+				}
+				else
+					await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
 			}
 			else {
 				await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
