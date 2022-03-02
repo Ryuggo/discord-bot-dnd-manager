@@ -15,6 +15,7 @@ module.exports = {
 			{
 				"Stats": [
 					{"COLOR": "#05f028"},
+					{"GOOD": "OK"},
 					{
 						"Physical": [
 							{"TOTAL": 200},

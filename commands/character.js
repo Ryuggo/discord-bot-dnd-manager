@@ -61,7 +61,7 @@ module.exports = {
 				})
 
 				let sheets;
-				if(map.get("NB")) {
+				if(map.get("NB") && parseInt(map.get("NB")) < bd["sheets"].length) {
 					sheets = sheet.Update(bd["sheets"][parseInt(map.get("NB"))], map);
 				}
 				else {
@@ -69,8 +69,25 @@ module.exports = {
 					sheets = sheet.Update(bdBlank["sheet"], map);
 					bd["sheets"].push(sheets)
 				}
-console.log(sheets[1]["Stats"]);
-				if(sheets[1]["Stats"] != null) {
+
+				// Check if stats aren't higher than the total
+				if(typeof sheets[1]["Stats"][2]["Physical"][0]["GOOD"] !== 'undefined') {
+					sheets[1]["Stats"][1]["GOOD"] = 'NO';
+					sheets[1]["Stats"][2]["Physical"].splice(0,1);
+				}
+				if(typeof sheets[1]["Stats"][3]["Fight"][0]["GOOD"] !== 'undefined') {
+					sheets[1]["Stats"][1]["GOOD"] = 'NO';
+					sheets[1]["Stats"][3]["Fight"].splice(0,1);
+				}
+				if(typeof sheets[1]["Stats"][4]["Magic"][0]["GOOD"] !== 'undefined') {
+					sheets[1]["Stats"][1]["GOOD"] = 'NO';
+					sheets[1]["Stats"][4]["Magic"].splice(0,1);
+				}
+				console.log(sheets[1]["Stats"][4][0])
+					
+	      bd2 = await db.get(interaction.member.guild.id);
+	      const list = bd2["dm"];
+				if(sheets[1]["Stats"][1]["GOOD"] == 'OK' || (list && interaction.member._roles.some(i => list.includes(i)))) {
 					db.set(interaction.member.user.id, bd);
 					
 					const embeds = sheet.Display(sheets, null, null);
@@ -78,6 +95,28 @@ console.log(sheets[1]["Stats"]);
 				}
 				else
 					await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
+				/*
+				if(list) {
+					if(sheets[1]["Stats"][1]["GOOD"] == 'OK' || interaction.member._roles.some(i => list.includes(i))) {
+						db.set(interaction.member.user.id, bd);
+						
+						const embeds = sheet.Display(sheets, null, null);
+						await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+					}
+					else
+						await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
+				}
+				else {
+					if(sheets[1]["Stats"][1]["GOOD"] == 'OK') {
+						db.set(interaction.member.user.id, bd);
+						
+						const embeds = sheet.Display(sheets, null, null);
+						await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+					}
+					else
+						await interaction.reply({ content: '```Stats are higher than the total allowed```', ephemeral: true });
+				}
+*/
 			}
 			else {
 				await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });

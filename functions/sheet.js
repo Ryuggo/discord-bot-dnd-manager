@@ -4,7 +4,7 @@ let total = 0;
 module.exports = {
 	Display (array, embed, name) {
 		let embeds = [];
-		array.forEach(bloc => {
+		for(const bloc of array) {
 			for(let key in bloc) {
 				if(name == null || name == key) {
 					embed = new MessageEmbed()
@@ -20,14 +20,14 @@ module.exports = {
 					}
 				}
 			}
-		});
+		}
 		return embeds;
 	},
 	
 	Display2 (array, embed) {
 		for(const bloc of array) {
 			for(let key in bloc) {
-				if(key != 'TOTAL' && key != 'COLOR' && key != 'imageURL' && bloc[key] != null) {
+				if(key != 'TOTAL' && key != 'COLOR' && key != 'GOOD' && key != 'imageURL' && bloc[key] != null) {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string' && typeof bloc[key] !== 'char') {
 						embed.addField('__'+ key +'__', '-_-_-_-_-_-_-', false);
 						embed = (this.Display2(bloc[key], embed));
@@ -53,35 +53,35 @@ module.exports = {
 
 	
 	Update (array, map) {
-		array.forEach(bloc => {
+		for(const bloc of array) {
 			for(let key in bloc) {
 				if(key != 'Skills' && key != 'Game') {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						bloc[key] = this.Update2(bloc[key], map);
-						if(bloc[key] == null) return null;
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
 					}
 				}
 			}
-		});
+		}
 		return array;
 	},
 	
 	Update2 (array, map) {
 		let actual = -1;
-		for(const bloc of array) {
+		for(let bloc of array) {
 			for(let key in bloc) {
-				if(key != 'TOTAL' && key != 'COLOR' && bloc[key] != null) {
-					console.log(total + " - " + actual);
+				if(key != 'TOTAL' && key != 'COLOR' && key != 'GOOD' && bloc[key] != null) {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
 						bloc[key] = this.Update2(bloc[key], map);
-						if(bloc[key] == null) return null;
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
 						if(actual != -1) {
 							actual += parseInt(bloc[key]);
-							if(actual > total) return null;
+							if(actual > total) {
+								array.splice(0, 0, {"GOOD": "NO"});
+								actual = -1;
+							}
 						}
 					}
 				}
