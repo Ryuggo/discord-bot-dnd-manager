@@ -57,7 +57,7 @@ module.exports = {
 			for(let key in bloc) {
 				if(key != 'Skills' && key != 'Game') {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
-						bloc[key] = this.Update2(bloc[key], map);
+						bloc[key] = this.Update2(bloc[key], map, true);
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
 					}
@@ -67,20 +67,26 @@ module.exports = {
 		return array;
 	},
 	
-	Update2 (array, map) {
+	Update2 (array, map, errorLow) {
 		let actual = -1;
 		for(let bloc of array) {
 			for(let key in bloc) {
 				if(key != 'TOTAL' && key != 'COLOR' && key != 'GOOD' && bloc[key] != null) {
 					if(bloc[key].length > 1 && typeof bloc[key] !== 'string') {
-						bloc[key] = this.Update2(bloc[key], map);
+						if(key == "Magic")
+							bloc[key] = this.Update2(bloc[key], map, false);
+						else
+							bloc[key] = this.Update2(bloc[key], map, errorLow);
 					} else {
 						bloc[key] = map.get(key) ? map.get(key) : bloc[key];
 						if(actual != -1) {
 							actual += parseInt(bloc[key]);
 							if(actual > total) {
-								array.splice(0, 0, {"GOOD": "NO"});
+								array[1] = {"GOOD": "HIGH"};
 								actual = -1;
+							}
+							if(bloc[key] < 5 && errorLow) {
+								array[1] = {"GOOD": "LOW"};
 							}
 						}
 					}

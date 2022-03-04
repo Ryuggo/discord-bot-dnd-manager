@@ -8,7 +8,7 @@ module.exports = {
 	InitDB: async (guildId) => {
 		// Init DB if Empty
 		db.get(guildId).then(bd => {
-		  //if (!bd)
+		  if (!bd)
 				bd = { "defaultDice": 100, "dm": [], "sheet": sheetTemplate.getSheet(), "enemies": enemiesList.getEnemies() }
 		  db.set(guildId, bd);
 		})

@@ -16,6 +16,7 @@ module.exports = {
 					{
 						"Physical": [
 							{"TOTAL": 200},
+							{"GOOD": "OK"},
 							{"Agility": -1, "Strength": -1, "Perception": -1},
 							{"Mental": -1},
 						],
@@ -23,6 +24,7 @@ module.exports = {
 					{
 						"Fight": [
 							{"TOTAL": 120},
+							{"GOOD": "OK"},
 							{"1 Hand/ Light": -1, "2 Hands/ Heavy": -1, "Shield/ Protection": -1},
 							{"Bow/ Range": -1},
 						],
@@ -30,6 +32,7 @@ module.exports = {
 					{
 						"Magic": [
 							{"TOTAL": 100},
+							{"GOOD": "OK"},
 							{"Water": -1, "Earth": -1, "Air": -1},
 							{"Lightning": -1, "Darkness": -1, "Light": -1},
 							{"Fire": -1},
