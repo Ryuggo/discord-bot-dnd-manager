@@ -1,8 +1,8 @@
 const Database = require("@replit/database")
 const db = new Database()
 
-const sheetTemplate = require("../data/sheet.js")
-const enemiesList = require("../data/enemies.js")
+const sheetTemplate = require("../datas/sheet.js")
+const enemiesList = require("../datas/enemies.js")
 
 module.exports = {
 	InitDB: async (guildId) => {
