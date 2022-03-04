@@ -13,13 +13,13 @@ module.exports = {
 		.setName('character')
 		.setDescription('Create and Manage Characters for the tabletop RPG')
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
-		.addStringOption(option => option.setName('select').setDescription('Select the part of the sheet you want to see (DM only)'))
+		.addStringOption(option => option.setName('choose').setDescription('Select the part of the sheet you want to see (DM only)'))
 		.addStringOption(option => option.setName('set').setDescription('Create/ Edit a Character [(NB=0+)Name=value+Sex=value+...]'))
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
 	async execute(interaction) {
 		const showCh = interaction.options.getUser('show');
-		const selectCh = interaction.options.getString('select');
+		const chooseCh = interaction.options.getString('choose');
 		const setCh = interaction.options.getString('set');
 		const removeCh = interaction.options.getBoolean('remove');
 
@@ -91,13 +91,13 @@ module.exports = {
 			let embeds = [];
 			if (bd && bd["sheets"].length > 0) {
 				let category = null;
-				if(selectCh)
-					category = selectCh == 'null'?null : selectCh;
+				if(chooseCh)
+					category = chooseCh == 'null'?null : chooseCh;
 				
 				let i = 0;
 				bd["sheets"].forEach(sheets => {
 					if(bd["charSelected"] == i) {
-						if(showCh.id == interaction.user.id || (interaction.user.id == interaction.member.guild.ownerId && !selectCh))
+						if(showCh.id == interaction.user.id || (interaction.user.id == interaction.member.guild.ownerId && !chooseCh))
 							embeds = sheet.Display(sheets, null, null);
 						else
 							embeds = sheet.Display(sheets, null, category);
