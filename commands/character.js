@@ -13,7 +13,7 @@ module.exports = {
 		.setName('character')
 		.setDescription('Create and Manage Characters for the tabletop RPG')
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
-		.addStringOption(option => option.setName('category').setDescription('Select the category of the sheet you want to see (DM only)'))
+		.addStringOption(option => option.setName('category').setDescription('Select the category you want to see (DM only) - Stats, Story, ..'))
 		.addStringOption(option => option.setName('set').setDescription('Create/ Edit a Character [(NB=0+)Name=value+Sex=value+...]'))
 		.addBooleanOption(option => option.setName('skill').setDescription('Select Skills for your current character (0, 1)'))
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))

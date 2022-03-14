@@ -19,7 +19,7 @@ for (const file of eventFiles) {
 	}
 }
 
-//keepAlive();
+keepAlive();
 
 // Login to Discord with your client's token
 client.login(token);
