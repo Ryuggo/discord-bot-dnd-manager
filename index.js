@@ -2,6 +2,7 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
+const keepAlive = require("./events/server")
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -18,5 +19,9 @@ for (const file of eventFiles) {
 	}
 }
 
+//keepAlive();
+
 // Login to Discord with your client's token
 client.login(token);
+
+//https://uptimerobot.com/dashboard#790852736

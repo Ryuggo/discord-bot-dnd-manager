@@ -1,9 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageActionRow, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageEmbed, MessageButton, MessageSelectMenu } = require('discord.js');
 
-const CreateButton = require("../functions/messageButton.js")
 const sheet = require("../functions/sheet.js")
 const display = require("../buttons/functions/displaySheets.js")
+const skills = require("../functions/skills.js")
 
 const Database = require("@replit/database")
 const db = new Database()
@@ -15,16 +15,18 @@ module.exports = {
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
 		.addStringOption(option => option.setName('category').setDescription('Select the category of the sheet you want to see (DM only)'))
 		.addStringOption(option => option.setName('set').setDescription('Create/ Edit a Character [(NB=0+)Name=value+Sex=value+...]'))
+		.addBooleanOption(option => option.setName('skill').setDescription('Select Skills for your current character'))
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
 	async execute(interaction) {
 		const showCh = interaction.options.getUser('show');
 		const categoryCh = interaction.options.getString('category');
 		const setCh = interaction.options.getString('set');
+		const skillCh = interaction.options.getBoolean('skill');
 		const removeCh = interaction.options.getBoolean('remove');
 
 		const row = new MessageActionRow();
-    if(setCh) {
+    if(setCh) { // Create a char
 			let bd;
 			if(showCh)
 				bd = await db.get(showCh.id)
@@ -74,6 +76,7 @@ module.exports = {
 					
 					const embeds = sheet.Display(sheets, null, null);
 					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
+					await interaction.followUp(interaction.member.user.username + ' : Character created');
 				}
 				else {
 					if(sheets[1]["Stats"][1]["GOOD"] == 'HIGH')
@@ -86,13 +89,13 @@ module.exports = {
 				await interaction.reply({ content: 'No more place for more Character \nTry removing another one before', ephemeral: true });
 			}
 		}
-		else if (showCh) {
+		else if (showCh) { // Display someone's char
 			const bd = await db.get(showCh.id);
 			let embeds = [];
 			if (bd && bd["sheets"].length > 0) {
 				let category = null;
 				if(categoryCh)
-					category = categoryCh == 'null'?null : categoryCh;
+					category = categoryCh == 'null' ? null : categoryCh;
 				
 				let i = 0;
 				bd["sheets"].forEach(sheets => {
@@ -110,7 +113,12 @@ module.exports = {
 			await interaction.reply({ content: '<@'+ showCh +'> doesn\'t have any Character', ephemeral: true });
 			}
 		}
-    else {
+		else if(skillCh) { // Select Skills for your current char
+			var selects = skills.ToSelect();
+			
+			await interaction.reply({ content: 'Select up to 5 skills for your current Character', components: [selects], ephemeral: true });
+		}
+    else { // Display your own chars
 			const bd = await db.get(interaction.member.user.id);
 			if (bd && bd["sheets"].length > 0) {
 				const array = display.Display(bd, removeCh);

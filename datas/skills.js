@@ -3,6 +3,7 @@ module.exports = {
 		return skills = [
 			{
 				"Name": "Acrobatie",
+				"Description": "",
 				
 				"Agility": 10,
 				"Strength": 0,
@@ -29,6 +30,7 @@ module.exports = {
 			},
 			{
 				"Name": "Adrénaline",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -55,6 +57,7 @@ module.exports = {
 			},
 			{
 				"Name": "Alchimie",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -81,6 +84,7 @@ module.exports = {
 			},
 			{
 				"Name": "Alcool (résistance)",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -107,6 +111,7 @@ module.exports = {
 			},
 			{
 				"Name": "Ambidextre",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -133,6 +138,7 @@ module.exports = {
 			},
 			{
 				"Name": "Animaux",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -159,6 +165,7 @@ module.exports = {
 			},
 			{
 				"Name": "Artisanat",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -185,6 +192,7 @@ module.exports = {
 			},
 			{
 				"Name": "Botte secrète",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -211,6 +219,7 @@ module.exports = {
 			},
 			{
 				"Name": "Bourrin",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -237,6 +246,7 @@ module.exports = {
 			},
 			{
 				"Name": "Cartographe",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -263,6 +273,7 @@ module.exports = {
 			},
 			{
 				"Name": "Charisme",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -289,6 +300,7 @@ module.exports = {
 			},
 			{
 				"Name": "Concentration",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -315,6 +327,7 @@ module.exports = {
 			},
 			{
 				"Name": "Cuisine",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -341,6 +354,7 @@ module.exports = {
 			},
 			{
 				"Name": "Dissimulation",
+				"Description": "",
 				
 				"Agility": 10,
 				"Strength": 0,
@@ -367,6 +381,7 @@ module.exports = {
 			},
 			{
 				"Name": "Dressage",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -393,6 +408,7 @@ module.exports = {
 			},
 			{
 				"Name": "Ecrire/ Lire",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -419,6 +435,7 @@ module.exports = {
 			},
 			{
 				"Name": "Eloquence",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -445,6 +462,7 @@ module.exports = {
 			},
 			{
 				"Name": "Equitation",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -471,6 +489,7 @@ module.exports = {
 			},
 			{
 				"Name": "Erudition",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -497,6 +516,7 @@ module.exports = {
 			},
 			{
 				"Name": "Héraldique",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -523,6 +543,7 @@ module.exports = {
 			},
 			{
 				"Name": "Herboristerie",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -549,6 +570,7 @@ module.exports = {
 			},
 			{
 				"Name": "Insensible",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -575,6 +597,7 @@ module.exports = {
 			},
 			{
 				"Name": "Intimidation",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -601,6 +624,7 @@ module.exports = {
 			},
 			{
 				"Name": "Jeu d'argent",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -627,6 +651,7 @@ module.exports = {
 			},
 			{
 				"Name": "Langues",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -653,6 +678,7 @@ module.exports = {
 			},
 			{
 				"Name": "Larcins",
+				"Description": "",
 				
 				"Agility": 10,
 				"Strength": 0,
@@ -679,6 +705,7 @@ module.exports = {
 			},
 			{
 				"Name": "Lecture Lèvre",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -705,6 +732,7 @@ module.exports = {
 			},
 			{
 				"Name": "Légendes",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -731,6 +759,7 @@ module.exports = {
 			},
 			{
 				"Name": "Médecine",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -757,6 +786,7 @@ module.exports = {
 			},
 			{
 				"Name": "Métallurgie",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -783,6 +813,7 @@ module.exports = {
 			},
 			{
 				"Name": "Natation",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -809,6 +840,7 @@ module.exports = {
 			},
 			{
 				"Name": "Navigation",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -835,6 +867,7 @@ module.exports = {
 			},
 			{
 				"Name": "Piège",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -861,6 +894,7 @@ module.exports = {
 			},
 			{
 				"Name": "Piège",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -887,6 +921,7 @@ module.exports = {
 			},
 			{
 				"Name": "Poison (résistance)",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -913,6 +948,7 @@ module.exports = {
 			},
 			{
 				"Name": "Réactif",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -939,6 +975,7 @@ module.exports = {
 			},
 			{
 				"Name": "Sommeil léger",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -965,6 +1002,7 @@ module.exports = {
 			},
 			{
 				"Name": "Sicième sens",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -991,6 +1029,7 @@ module.exports = {
 			},
 			{
 				"Name": "Théologie",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1017,6 +1056,7 @@ module.exports = {
 			},
 			{
 				"Name": "Veinard",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1043,6 +1083,7 @@ module.exports = {
 			},
 			{
 				"Name": "Vue perçante",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1073,6 +1114,7 @@ module.exports = {
 /*
 			{
 				"Name": "",
+				"Description": "",
 				
 				"Agility": 0,
 				"Strength": 0,

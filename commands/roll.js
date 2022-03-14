@@ -83,11 +83,11 @@ module.exports = {
       for(let [key, value] of list) {
         let tmp = [];
 				let i = 0;
-        for(; i < value && i < 100; i++) {
-          tmp.push(Math.floor(Math.random() * key + 1));
+        for(; i < value && i < 200; i++) {
+          tmp.push(Math.floor(Math.random() * (key <= 1000 ? key : 1000) + 1));
         }
         txt += '# '+ tmp.reduce((partialSum, a) => partialSum + a, 0) +'\n';
-				txt += 'Details:['+ i-- +"d"+ key +' ('+ tmp.join(" ") +')]\n';
+				txt += 'Details:['+ i-- +"d"+ (key <= 1000 ? key : 1000) +' ('+ tmp.join(" ") +')]\n';
 
 				j++;
 				if(j > 10) break;
