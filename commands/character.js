@@ -114,11 +114,18 @@ module.exports = {
 			}
 		}
 		else if(skillCh) { // Select Skills for your current char
-			var selects = skills.ToSelect(0);
-			await interaction.reply({ content: 'Select up to 5 skills for your current Character', components: [selects], ephemeral: true });
+			let bd = await db.get(interaction.member.user.id)
 			
-			selects = skills.ToSelect(1);
-			await interaction.followUp({ content: 'Select up to 5 skills for your current Character', components: [selects], ephemeral: true });
+			if(!bd) {
+				await interaction.reply({ content: 'You don\'t have any Character', ephemeral: true });
+			}
+			else {
+				var selects = skills.ToSelect(0);
+				await interaction.reply({ content: 'Select up to 5 skills in total for your current Character\n*(5 with this box + this other one, not 5 for each of them)*', components: [selects], ephemeral: true });
+				
+				selects = skills.ToSelect(1);
+				await interaction.followUp({ content: 'Select up to 5 skills in total for your current Character\n*(5 with this box + this other one, not 5 for each of them)*', components: [selects], ephemeral: true });
+			}
 		}
     else { // Display your own chars
 			const bd = await db.get(interaction.member.user.id);

@@ -59,7 +59,7 @@ module.exports = {
 			if (!select) return;
 
 			try {
-				select.execute(interaction.message.components[0].components[0].options, interaction.values);
+				select.execute(interaction);
 			} catch (error) {
 				console.error(error);
 				interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
