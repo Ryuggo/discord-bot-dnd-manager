@@ -15,7 +15,7 @@ module.exports = {
 		.addUserOption(option => option.setName('show').setDescription('Show someone\'s Characters'))
 		.addStringOption(option => option.setName('category').setDescription('Select the category of the sheet you want to see (DM only)'))
 		.addStringOption(option => option.setName('set').setDescription('Create/ Edit a Character [(NB=0+)Name=value+Sex=value+...]'))
-		.addBooleanOption(option => option.setName('skill').setDescription('Select Skills for your current character'))
+		.addBooleanOption(option => option.setName('skill').setDescription('Select Skills for your current character (0, 1)'))
 		.addBooleanOption(option => option.setName('remove').setDescription('Remove one of your Characters'))
 		,
 	async execute(interaction) {
@@ -114,9 +114,11 @@ module.exports = {
 			}
 		}
 		else if(skillCh) { // Select Skills for your current char
-			var selects = skills.ToSelect();
-			
+			var selects = skills.ToSelect(0);
 			await interaction.reply({ content: 'Select up to 5 skills for your current Character', components: [selects], ephemeral: true });
+			
+			selects = skills.ToSelect(1);
+			await interaction.followUp({ content: 'Select up to 5 skills for your current Character', components: [selects], ephemeral: true });
 		}
     else { // Display your own chars
 			const bd = await db.get(interaction.member.user.id);

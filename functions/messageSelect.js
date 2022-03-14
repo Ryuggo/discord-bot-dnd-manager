@@ -1,15 +1,14 @@
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 module.exports = {
-	CreateSelect: (id, txt, min, max) => {
-		return new MessageActionRow()
-			.addComponents(
-				new MessageSelectMenu()
-					.setCustomId(id)
-					.setPlaceholder(txt)
-					.setMinValues(min)
-					.setMaxValues(max)
-			);
+	AddOption: (msg, id, txt, min, max) => {
+		return msg.addComponents(
+			new MessageSelectMenu()
+				.setCustomId(id)
+				.setPlaceholder(txt)
+				.setMinValues(min)
+				.setMaxValues(max)
+		);
 	},
 	
 	AddSelect: (msg, lab, desc, val) => {

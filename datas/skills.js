@@ -4,6 +4,7 @@ module.exports = {
 			{
 				"Name": "Acrobatie",
 				"Description": "",
+				"Description": "",
 				
 				"Agility": 10,
 				"Strength": 0,

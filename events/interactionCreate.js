@@ -54,20 +54,12 @@ module.exports = {
 				const select = require(`../selects/${file}`);
 				interaction.client.select.set(select.data.custom_id, select);
 			}
-
-			const select = interaction.client.select.get(interaction.values[0]);
+			
+			const select = interaction.client.select.get((interaction.customId.split('-'))[0]);
 			if (!select) return;
 
 			try {
-				/* Doesn't work :	Interaction has already been acknowledged.
-				interaction.values.forEach(i => {
-					const select = interaction.client.select.get(i);
-					if (!select) return;
-
-					select.execute(interaction);
-				});
-				*/
-				select.execute(interaction);
+				select.execute(interaction.message.components[0].components[0].options, interaction.values);
 			} catch (error) {
 				console.error(error);
 				interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
