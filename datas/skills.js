@@ -3,7 +3,7 @@ module.exports = {
 		return skills = [
 			{
 				"Name": "Acrobatie",
-				"Description": "",
+				"Description": "Esquive et se déplace plus facilement",
 				
 				"Agility": 10,
 				"Strength": 0,
@@ -57,7 +57,7 @@ module.exports = {
 			},
 			{
 				"Name": "Alchimie",
-				"Description": "",
+				"Description": "Créer et connaître les effets des potions",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -84,7 +84,7 @@ module.exports = {
 			},
 			{
 				"Name": "Alcool (résistance)",
-				"Description": "",
+				"Description": "Addiction et résistance à l'alcool",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -111,7 +111,7 @@ module.exports = {
 			},
 			{
 				"Name": "Ambidextre",
-				"Description": "",
+				"Description": "Utiliser 1 arme par main",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -138,7 +138,7 @@ module.exports = {
 			},
 			{
 				"Name": "Animaux",
-				"Description": "",
+				"Description": "Connaissance et Compréhension des animaux",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -165,7 +165,7 @@ module.exports = {
 			},
 			{
 				"Name": "Artisanat",
-				"Description": "",
+				"Description": "Réparer et Fabriquer des objets simples",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -192,7 +192,7 @@ module.exports = {
 			},
 			{
 				"Name": "Botte secrète",
-				"Description": "",
+				"Description": "Effectue une attaque inconnue qui marche à tous les coups",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -219,7 +219,7 @@ module.exports = {
 			},
 			{
 				"Name": "Bourrin",
-				"Description": "",
+				"Description": "Détruire tous types d'objets avec assez de force",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -246,7 +246,7 @@ module.exports = {
 			},
 			{
 				"Name": "Cartographe",
-				"Description": "",
+				"Description": "Dessiner et Lire des cartes",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -273,7 +273,7 @@ module.exports = {
 			},
 			{
 				"Name": "Charisme",
-				"Description": "",
+				"Description": "Séduire les gens du sexe opposé pour être “obéi”",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -327,7 +327,7 @@ module.exports = {
 			},
 			{
 				"Name": "Cuisine",
-				"Description": "",
+				"Description": "Pour ne pas mourir de faim lors des longs trajets",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -354,7 +354,7 @@ module.exports = {
 			},
 			{
 				"Name": "Dissimulation",
-				"Description": "",
+				"Description": "Se cacher soi et des objets plus facilement",
 				
 				"Agility": 10,
 				"Strength": 0,
@@ -381,7 +381,7 @@ module.exports = {
 			},
 			{
 				"Name": "Dressage",
-				"Description": "",
+				"Description": "Apaiser certaine créatures ou monstres pas trop agressifs",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -408,7 +408,7 @@ module.exports = {
 			},
 			{
 				"Name": "Ecrire/ Lire",
-				"Description": "",
+				"Description": "Rend aussi intelligent qu'ne enfant en bas âge",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -435,7 +435,7 @@ module.exports = {
 			},
 			{
 				"Name": "Eloquence",
-				"Description": "",
+				"Description": "Mieux parler pour convaincre plus facilement les autres",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -462,7 +462,7 @@ module.exports = {
 			},
 			{
 				"Name": "Equitation",
-				"Description": "",
+				"Description": "Chevaucher sans problèmes tous types d’animaux sellés ou non",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -489,7 +489,7 @@ module.exports = {
 			},
 			{
 				"Name": "Erudition",
-				"Description": "",
+				"Description": "Avoir fait des études de magie pour maîtriser plus de sorts",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -516,7 +516,7 @@ module.exports = {
 			},
 			{
 				"Name": "Héraldique",
-				"Description": "",
+				"Description": "Être connu des dirigeants des villes où l'on a aidé",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -543,7 +543,7 @@ module.exports = {
 			},
 			{
 				"Name": "Herboristerie",
-				"Description": "",
+				"Description": "Connaître les plantes et leur utilisation",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -570,7 +570,7 @@ module.exports = {
 			},
 			{
 				"Name": "Insensible",
-				"Description": "",
+				"Description": "Immuniser contre la douleur et les effets en tout genre",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -597,7 +597,7 @@ module.exports = {
 			},
 			{
 				"Name": "Intimidation",
-				"Description": "",
+				"Description": "Augmente la probabilité que les gens se rendent / “obéissent”",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -624,7 +624,7 @@ module.exports = {
 			},
 			{
 				"Name": "Jeu d'argent",
-				"Description": "",
+				"Description": "Augmenter la probabilité de gagner aux jeux d'argent",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -651,7 +651,7 @@ module.exports = {
 			},
 			{
 				"Name": "Langues",
-				"Description": "",
+				"Description": "Comprendre et déchiffrer des langues mortes et étrangères",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -678,7 +678,7 @@ module.exports = {
 			},
 			{
 				"Name": "Larcins",
-				"Description": "",
+				"Description": "Faciliter pour commettre des petits crimes en tout genre",
 				
 				"Agility": 10,
 				"Strength": 0,
@@ -705,7 +705,7 @@ module.exports = {
 			},
 			{
 				"Name": "Lecture Lèvre",
-				"Description": "",
+				"Description": "Entendre les conversations à distance",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -732,7 +732,7 @@ module.exports = {
 			},
 			{
 				"Name": "Légendes",
-				"Description": "",
+				"Description": "Connaître les légendes et mythes des villages visité",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -759,7 +759,7 @@ module.exports = {
 			},
 			{
 				"Name": "Médecine",
-				"Description": "",
+				"Description": "Permet de soigner certaines blessures pour économiser de la magie",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -786,7 +786,7 @@ module.exports = {
 			},
 			{
 				"Name": "Métallurgie",
-				"Description": "",
+				"Description": "Connaissance des métaux et minéraux et leur utilité",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -813,7 +813,7 @@ module.exports = {
 			},
 			{
 				"Name": "Natation",
-				"Description": "",
+				"Description": "Savoir nager en étant sûr de ne pas se noyer",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -840,7 +840,7 @@ module.exports = {
 			},
 			{
 				"Name": "Navigation",
-				"Description": "",
+				"Description": "Connaissance maritime pour manoeuvrer une embarcation sur l’eau",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -867,38 +867,11 @@ module.exports = {
 			},
 			{
 				"Name": "Piège",
-				"Description": "",
+				"Description": "Détection et Fabrication de pièges",
 				
 				"Agility": 0,
 				"Strength": 0,
 				"Perception": 0,
-				"Mental": 0,
-				
-				"1 Hand/ Light": 0,
-				"2 Hands/ Heavy": 0,
-				"Shield/ Protection": 0,
-				"Bow/ Range": 0,
-				
-				"Water": 0,
-				"Earth": 0,
-				"Air": 0,
-				"Lightning": 0,
-				"Darkness": 0,
-				"Light": 0,
-				"Fire": 0,
-				
-				"HP": 0,
-				"MP": 0,
-				"Dmg": 0,
-				"Armor": 0,
-			},
-			{
-				"Name": "Piège",
-				"Description": "",
-				
-				"Agility": 0,
-				"Strength": 0,
-				"Perception": 20,
 				"Mental": 0,
 				
 				"1 Hand/ Light": 0,
@@ -921,7 +894,7 @@ module.exports = {
 			},
 			{
 				"Name": "Poison (résistance)",
-				"Description": "",
+				"Description": "Création et résistance à certain poisons",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -975,7 +948,7 @@ module.exports = {
 			},
 			{
 				"Name": "Sommeil léger",
-				"Description": "",
+				"Description": "Rester sur ses gardes en dormant",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1001,8 +974,8 @@ module.exports = {
 				"Armor": 0,
 			},
 			{
-				"Name": "Sicième sens",
-				"Description": "",
+				"Name": "Sixième sens",
+				"Description": "Prédire une situation dangereuse imminente",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1029,7 +1002,7 @@ module.exports = {
 			},
 			{
 				"Name": "Théologie",
-				"Description": "",
+				"Description": "Connaissance sur les religions et les cultes",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1056,7 +1029,7 @@ module.exports = {
 			},
 			{
 				"Name": "Veinard",
-				"Description": "",
+				"Description": "Une fois par session, tromper le destin et changer un échec critique en réussite",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -1083,7 +1056,7 @@ module.exports = {
 			},
 			{
 				"Name": "Vue perçante",
-				"Description": "",
+				"Description": "Détecter les ennemis de plus loin",
 				
 				"Agility": 0,
 				"Strength": 0,

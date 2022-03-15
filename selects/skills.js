@@ -12,12 +12,12 @@ module.exports = {
 			let selects = interaction.values;
 			
 			let bd;
-			var showCh = (options[0].value.split('+'))[0];
-			if(showCh)
+			const showCh = (options[0].value.split('+'))[0];
+			
+			if(showCh.length === 0)
 				bd = await db.get(showCh)
 			else
 				bd = await db.get(interaction.member.user.id)
-
 			
 			for(let i of selects) {
 				var j = (i.split('+'))[1];
@@ -29,7 +29,7 @@ module.exports = {
 			bd2 = await db.get(interaction.member.guild.id);
 			const list = bd2["dm"];
 			if(bd.sheets[bd.charSelected][3].Skills[2].List.length <= 5 || (bd.sheets[bd.charSelected][3].Skills[2].List.length <= 20 && list && interaction.member._roles.some(i => list.includes(i)))) {
-				if(showCh)
+				if(showCh.length === 0)
 					db.set(showCh, bd);
 				else
 					db.set(interaction.member.user.id, bd);
