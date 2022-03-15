@@ -30,7 +30,7 @@ module.exports = {
 			},
 			{
 				"Name": "Adrénaline",
-				"Description": "",
+				"Description": "Rester sous adrénaline jusqu’à la fin du combat",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -300,7 +300,7 @@ module.exports = {
 			},
 			{
 				"Name": "Concentration",
-				"Description": "",
+				"Description": "Il est plus facile de se concentrer",
 				
 				"Agility": 0,
 				"Strength": 0,
@@ -920,18 +920,18 @@ module.exports = {
 				"Armor": 0,
 			},
 			{
-				"Name": "Réactif",
-				"Description": "",
+				"Name": "Sixième sens",
+				"Description": "Prédire une situation dangereuse imminente",
 				
 				"Agility": 0,
 				"Strength": 0,
 				"Perception": 0,
 				"Mental": 0,
 				
-				"1 Hand/ Light": 5,
-				"2 Hands/ Heavy": 5,
-				"Shield/ Protection": 10,
-				"Bow/ Range": 5,
+				"1 Hand/ Light": 0,
+				"2 Hands/ Heavy": 0,
+				"Shield/ Protection": 0,
+				"Bow/ Range": 0,
 				
 				"Water": 0,
 				"Earth": 0,
@@ -974,18 +974,18 @@ module.exports = {
 				"Armor": 0,
 			},
 			{
-				"Name": "Sixième sens",
-				"Description": "Prédire une situation dangereuse imminente",
+				"Name": "Stressé",
+				"Description": "Permet de passer sous Adrénaline à n’importe quel moment",
 				
 				"Agility": 0,
 				"Strength": 0,
 				"Perception": 0,
 				"Mental": 0,
 				
-				"1 Hand/ Light": 0,
-				"2 Hands/ Heavy": 0,
-				"Shield/ Protection": 0,
-				"Bow/ Range": 0,
+				"1 Hand/ Light": 5,
+				"2 Hands/ Heavy": 5,
+				"Shield/ Protection": 10,
+				"Bow/ Range": 5,
 				
 				"Water": 0,
 				"Earth": 0,
