@@ -53,6 +53,7 @@ module.exports = {
 					const bdBlank = await db.get(interaction.guild.id)
 					sheets = sheet.Update(bdBlank["sheet"], map);
 					bd["sheets"].push(sheets)
+					bd["charSelected"] = bd["sheets"].length - 1;
 				}
 
 				// Check if stats aren't higher than the total
@@ -73,6 +74,10 @@ module.exports = {
 						db.set(showCh.id, bd);
 					else
 						db.set(interaction.member.user.id, bd);
+
+					const name = sheets[0].Character[1].Name
+					if (interaction.member.user.id !== interaction.member.guild.ownerId)
+						interaction.member.setNickname(name);
 					
 					const embeds = sheet.Display(sheets, null, null);
 					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
