@@ -81,7 +81,8 @@ module.exports = {
 					
 					const embeds = sheet.Display(sheets, null, null);
 					await interaction.reply({ content: '```Markdown\n# Character\'s Sheet```', ephemeral: true, embeds: embeds });
-					await interaction.followUp(interaction.member.user.username + ' : Character created');
+					if(!map.get("NB"))
+						await interaction.followUp(interaction.member.user.username + ' : Character created');
 				}
 				else {
 					if(sheets[1]["Stats"][1]["GOOD"] == 'HIGH')
